@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-NUM_TRIALS =  10000 #10000
+NUM_TRIALS =  10 #10000
 EPS = 0.1
 BANDIT_PROBS = [0.99, 0.2, 0.75, 0.5, 0.1, 0.75]
 
@@ -63,7 +63,6 @@ def experiment():
         print(f"mean estimate is {b.prob_estimate}")
  
     # print total reward
-    # print(f"Rewards is {rewards}")
     print("total reward earned:", rewards.sum())
     print("overall win rate:", rewards.sum() / NUM_TRIALS)
     print("num_times_explored:", num_times_explored)
@@ -71,8 +70,11 @@ def experiment():
     print("num times selected optimal bandit:", num_optimal)
 
     # plot the results
+    print(f"rewards are {rewards}")
     cumulative_rewards = np.cumsum(rewards)
+    print(f"cumulative reward is {cumulative_rewards}")
     win_rates = cumulative_rewards / (np.arange(NUM_TRIALS) + 1)
+    print(f"win_rate is {win_rates}")
     plt.plot(win_rates)
     plt.plot(np.ones(NUM_TRIALS)*np.max(BANDIT_PROBS))
     plt.show()
