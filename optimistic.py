@@ -1,11 +1,3 @@
-# From the course: Bayesin Machine Learning in Python: A/B Testing
-# https://deeplearningcourses.com/c/bayesian-machine-learning-in-python-ab-testing
-# https://www.udemy.com/bayesian-machine-learning-in-python-ab-testing
-from __future__ import print_function, division
-from builtins import range
-# Note: you may need to update your version of future
-# sudo pip install -U future
-
 
 import matplotlib.pyplot as plt
 import numpy as np
