@@ -3,9 +3,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-NUM_TRIALS =  100 #10000
+NUM_TRIALS =  10000 #10000
 EPS = 0.1
-BANDIT_PROBS = [ 0.2, 0.5, 0.75]
+BANDIT_PROBS = [0.99, 0.2, 0.75, 0.5, 0.1, 0.75]
 
 
 class Bandit:
@@ -16,12 +16,13 @@ class Bandit:
 
     def pull(self):
         check = np.random.random() < self.prob
-        print(f"check is {check}")
+        # print(f"check is {check}")
         return check
     
     def update(self, x):
         self.N += 1
-        self.prob_estimate += x
+        #use the formula here
+        self.prob_estimate = ((self.N -1 ) * self.prob + x)/self.N
 
 
 def experiment():
@@ -38,11 +39,11 @@ def experiment():
 
         #check for EPS
         if np.random.random() < EPS:
-            print(f"Exploring")
+            # print(f"Exploring")
             num_times_explored += 1
             j = np.random.randint(len(BANDIT_PROBS))
         else:
-            print("Exploiting")
+            # print("Exploiting")
             num_times_exploited += 1
             j = np.argmax([b.prob for b in bandits])
 
@@ -62,6 +63,7 @@ def experiment():
         print(f"mean estimate is {b.prob_estimate}")
  
     # print total reward
+    # print(f"Rewards is {rewards}")
     print("total reward earned:", rewards.sum())
     print("overall win rate:", rewards.sum() / NUM_TRIALS)
     print("num_times_explored:", num_times_explored)
