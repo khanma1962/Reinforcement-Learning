@@ -22,6 +22,7 @@ class Bandit:
   def update(self, x):
     self.N += 1.
     self.p_estimate = ((self.N - 1)*self.p_estimate + x) / self.N
+    # print(f"updating estimate is {self.p_estimate} and N {self.N}")
 
 
 def ucb(mean, n, nj):
@@ -36,6 +37,7 @@ def run_experiment():
   # initialization: play each bandit once
   for j in range(len(bandits)):
     x = bandits[j].pull()
+    # print(f"bandit number is {j} and pull result is {x}")
     total_plays += 1
     bandits[j].update(x)
   
@@ -48,6 +50,9 @@ def run_experiment():
 
     # for the plot
     rewards[i] = x
+    # print(f"Reward is {rewards}\n")
+  # print(f"After loop rewards is {rewards}")
+  # print(f"cumsum is {np.cumsum(rewards)}\n")
   cumulative_average = np.cumsum(rewards) / (np.arange(NUM_TRIALS) + 1)
 
   # plot moving average ctr
